@@ -106,7 +106,7 @@ if %BUILD_FOR_PYTHON2%==true (
 )
 
 rem Build for Python 3
-rem
+rem 
 if %BUILD_FOR_PYTHON3%==true (
     echo Building Python API for Python 3.
     py -3 setup.py bdist_egg bdist_wheel

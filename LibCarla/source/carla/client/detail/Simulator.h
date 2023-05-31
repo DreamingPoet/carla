@@ -368,6 +368,10 @@ namespace detail {
       return GetActorSnapshot(actor).transform;
     }
 
+    geom::Vector3D GetForwardVector(const Actor &actor) const {
+      return GetActorSnapshot(actor).forward_vector;
+    }
+
     geom::Vector3D GetActorVelocity(const Actor &actor) const {
       return GetActorSnapshot(actor).velocity;
     }

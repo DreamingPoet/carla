@@ -1185,6 +1185,7 @@ class CameraManager(object):
 
     @staticmethod
     def _parse_image(weak_self, image):
+        print(type(image))
         self = weak_self()
         if not self:
             return
@@ -1244,6 +1245,7 @@ def game_loop(args):
         client.set_timeout(2000.0)
 
         sim_world = client.get_world()
+        # sim_world = client.load_world()
         if args.sync:
             original_settings = sim_world.get_settings()
             settings = sim_world.get_settings()

@@ -20,6 +20,10 @@ namespace client {
     return GetEpisode().Lock()->GetActorTransform(*this);
   }
 
+  geom::Vector3D Actor::GetForwardVector() const {
+    return GetEpisode().Lock()->GetForwardVector(*this);
+  }
+
   geom::Vector3D Actor::GetVelocity() const {
     return GetEpisode().Lock()->GetActorVelocity(*this);
   }

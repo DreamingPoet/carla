@@ -41,6 +41,7 @@ void FActorData::RecordActorData(FCarlaActor* CarlaActor, UCarlaEpisode* CarlaEp
     AngularVelocity = Component->GetPhysicsAngularVelocityInDegrees();
   }
   Velocity = Actor->GetVelocity();
+  ForwardVector = Actor->GetActorForwardVector();
 }
 
 void FActorData::RestoreActorData(FCarlaActor* CarlaActor, UCarlaEpisode* CarlaEpisode)

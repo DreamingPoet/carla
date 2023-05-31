@@ -129,6 +129,8 @@ namespace detail {
 
     geom::Transform transform;
 
+    geom::Vector3D forward_vector;
+    
     geom::Vector3D velocity;
 
     geom::Vector3D angular_velocity;
