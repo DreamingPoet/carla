@@ -22,7 +22,10 @@ namespace rpc {
 
     std::vector<geom::Transform> recommended_spawn_points;
 
-    MSGPACK_DEFINE_ARRAY(name, recommended_spawn_points);
+    std::vector<std::string> recommended_target_points_names;
+    std::vector<geom::Transform> recommended_target_points;
+
+    MSGPACK_DEFINE_ARRAY(name, recommended_spawn_points, recommended_target_points_names, recommended_target_points);
   };
 
 } // namespace rpc

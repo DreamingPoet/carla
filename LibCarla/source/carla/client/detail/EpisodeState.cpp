@@ -28,7 +28,6 @@ namespace detail {
               actor.id,
               actor.actor_state,
               actor.transform,
-              actor.forward_vector,
               actor.velocity,
               actor.angular_velocity,
               actor.acceleration,

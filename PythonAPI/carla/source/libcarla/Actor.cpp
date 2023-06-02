@@ -110,7 +110,6 @@ void export_actor() {
       .def("get_world", CALL_RETURNING_COPY(cc::Actor, GetWorld))
       .def("get_location", &cc::Actor::GetLocation)
       .def("get_transform", &cc::Actor::GetTransform)
-      .def("get_forward_vector", &cc::Actor::GetForwardVector)
       .def("get_velocity", &cc::Actor::GetVelocity)
       .def("get_angular_velocity", &cc::Actor::GetAngularVelocity)
       .def("get_acceleration", &cc::Actor::GetAcceleration)

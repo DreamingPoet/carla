@@ -51,6 +51,9 @@ namespace client {
       return _description.recommended_spawn_points;
     }
 
+
+    const geom::Transform GetTargetPointByName(std::string id) const;
+    
     SharedPtr<Waypoint> GetWaypoint(
         const geom::Location &location,
         bool project_to_road = true,

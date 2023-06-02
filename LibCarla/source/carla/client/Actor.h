@@ -42,8 +42,6 @@ namespace client {
     /// transform received in the last tick.
     geom::Transform GetTransform() const;
 
-    geom::Vector3D GetForwardVector() const;
-
     /// Return the current 3D velocity of the actor.
     ///
     /// @note This function does not call the simulator, it returns the

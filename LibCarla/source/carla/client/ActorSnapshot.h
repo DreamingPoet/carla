@@ -19,7 +19,6 @@ namespace client {
     ActorId id = 0u;
     rpc::ActorState actor_state;
     geom::Transform transform;
-    geom::Vector3D forward_vector;
     geom::Vector3D velocity;
     geom::Vector3D angular_velocity;
     geom::Vector3D acceleration;

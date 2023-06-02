@@ -41,6 +41,22 @@ namespace client {
 
   Map::~Map() = default;
 
+  const geom::Transform Map::GetTargetPointByName(std::string id) const{
+
+    int nPosition = -1;
+    auto iter = std::find(std::begin(_description.recommended_target_points_names), std::end(_description.recommended_target_points_names), id);
+    if (iter != std::end(_description.recommended_target_points_names))
+    {
+        nPosition = iter - std::begin(_description.recommended_target_points_names);
+    }
+
+    if (nPosition >= 0 && _description.recommended_target_points.size() >= nPosition + 1) {
+      return _description.recommended_target_points[nPosition];
+    } else {
+      return geom::Transform();
+    }
+  }
+  
   SharedPtr<Waypoint> Map::GetWaypoint(
   const geom::Location &location,
   bool project_to_road,
