@@ -66,6 +66,16 @@ public:
     return SpawnPointsTransforms;
   }
 
+  UFUNCTION(Category = "Carla Game Mode", BlueprintCallable)
+      const TArray<FString>& GetTargetPointsNames() const {
+      return TargetPointsNames;
+  }
+
+  UFUNCTION(Category = "Carla Game Mode", BlueprintCallable)
+      const TArray<FTransform>& GetTargetPoints() const {
+      return TargetPoints;
+  }
+
   UFUNCTION(Category = "Carla Game Mode", BlueprintCallable, CallInEditor, Exec)
   TArray<FBoundingBox> GetAllBBsOfLevel(uint8 TagQueried = 0xFF) const;
 
@@ -130,6 +140,8 @@ private:
 
   void StoreSpawnPoints();
 
+  void StoreTargetPoints();
+
   void GenerateSpawnPoints();
 
   void ParseOpenDrive();
@@ -169,6 +181,12 @@ private:
 
   UPROPERTY()
   TArray<FTransform> SpawnPointsTransforms;
+
+  UPROPERTY()
+  TArray<FString> TargetPointsNames;
+
+  UPROPERTY()
+  TArray<FTransform> TargetPoints;
 
   UPROPERTY()
   TArray<ACarlaActorFactory *> ActorFactoryInstances;

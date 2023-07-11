@@ -243,6 +243,20 @@ TArray<FTransform> UCarlaEpisode::GetRecommendedSpawnPoints() const
   return GM->GetSpawnPointsTransforms();
 }
 
+TArray<FString> UCarlaEpisode::GetRecommendedTargetPointsNames() const
+{
+    ACarlaGameModeBase* GM = UCarlaStatics::GetGameMode(GetWorld());
+
+    return GM->GetTargetPointsNames();
+}
+
+TArray<FTransform> UCarlaEpisode::GetRecommendedTargetPoints() const
+{
+    ACarlaGameModeBase* GM = UCarlaStatics::GetGameMode(GetWorld());
+
+    return GM->GetTargetPoints();
+}
+
 carla::rpc::Actor UCarlaEpisode::SerializeActor(FCarlaActor *CarlaActor) const
 {
   carla::rpc::Actor Actor;

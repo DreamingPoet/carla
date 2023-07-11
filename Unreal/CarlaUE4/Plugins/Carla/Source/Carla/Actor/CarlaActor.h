@@ -203,8 +203,6 @@ public:
       const FTransform& Transform,
       ETeleportType Teleport = ETeleportType::TeleportPhysics);
 
-  FVector GetForwardVector() const;
-
   FVector GetActorVelocity() const;
 
   FVector GetActorAngularVelocity() const;

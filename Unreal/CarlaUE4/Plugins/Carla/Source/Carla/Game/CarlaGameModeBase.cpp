@@ -155,6 +155,7 @@ void ACarlaGameModeBase::InitGame(
   if(Map.has_value())
   {
     StoreSpawnPoints();
+    StoreTargetPoints();
   }
 }
 
@@ -412,19 +413,30 @@ void ACarlaGameModeBase::SpawnActorFactories()
   }
 }
 
+void ACarlaGameModeBase::StoreTargetPoints()
+{
+  for (TActorIterator<ACustomTargetPoint> It(GetWorld()); It; ++It)
+  {
+    TargetPoints.Add(It->GetActorTransform());
+    TargetPointsNames.Add(It->Name);
+  }
+
+  UE_LOG(LogCarla, Log, TEXT("There are %d TargetPoints in the map"), TargetPoints.Num());
+}
+
 void ACarlaGameModeBase::StoreSpawnPoints()
 {
-  for (TActorIterator<AVehicleSpawnPoint> It(GetWorld()); It; ++It)
-  {
-    SpawnPointsTransforms.Add(It->GetActorTransform());
-  }
+    for (TActorIterator<AVehicleSpawnPoint> It(GetWorld()); It; ++It)
+    {
+        SpawnPointsTransforms.Add(It->GetActorTransform());
+    }
 
-  if(SpawnPointsTransforms.Num() == 0)
-  {
-    GenerateSpawnPoints();
-  }
+    if (SpawnPointsTransforms.Num() == 0)
+    {
+        GenerateSpawnPoints();
+    }
 
-  UE_LOG(LogCarla, Log, TEXT("There are %d SpawnPoints in the map"), SpawnPointsTransforms.Num());
+    UE_LOG(LogCarla, Log, TEXT("There are %d SpawnPoints in the map"), SpawnPointsTransforms.Num());
 }
 
 void ACarlaGameModeBase::GenerateSpawnPoints()

@@ -455,12 +455,23 @@ void FCarlaServer::FPimpl::BindActions()
     REQUIRE_CARLA_EPISODE();
     ACarlaGameModeBase* GameMode = UCarlaStatics::GetGameMode(Episode->GetWorld());
     const auto &SpawnPoints = Episode->GetRecommendedSpawnPoints();
+    const auto& TargetPointsNames = Episode->GetRecommendedTargetPointsNames();
+    const auto& TargetPoints = Episode->GetRecommendedTargetPoints();
     FString FullMapPath = GameMode->GetFullMapPath();
     FString MapDir = FullMapPath.RightChop(FullMapPath.Find("Content/", ESearchCase::CaseSensitive) + 8);
     MapDir += "/" + Episode->GetMapName();
+
+    std::vector<std::string> TargetPointsNames_cstr;
+    for (auto i : TargetPointsNames) {
+        std::string MyStdString(TCHAR_TO_UTF8(*i));
+        TargetPointsNames_cstr.push_back(MyStdString);
+    }
+
     return cr::MapInfo{
       cr::FromFString(MapDir),
-      MakeVectorFromTArray<cg::Transform>(SpawnPoints)};
+      MakeVectorFromTArray<cg::Transform>(SpawnPoints),
+      TargetPointsNames_cstr,
+      MakeVectorFromTArray<cg::Transform>(TargetPoints)};
   };
 
   BIND_SYNC(get_map_data) << [this]() -> R<std::string>

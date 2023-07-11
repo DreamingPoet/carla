@@ -32,8 +32,6 @@ public:
 
   FQuat Rotation;
 
-  FVector ForwardVector;
-
   FVector Scale;
 
   FVector Velocity;

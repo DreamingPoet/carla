@@ -15,3 +15,16 @@ class CARLA_API AVehicleSpawnPoint : public ATargetPoint
 {
   GENERATED_BODY()
 };
+
+
+/// Base class for Target locations for anything.
+UCLASS()
+class CARLA_API ACustomTargetPoint : public ATargetPoint
+{
+	GENERATED_BODY()
+
+public:
+	// Only ASCII chataters are supported!
+	UPROPERTY(EditAnywhere)
+	FString Name;
+};

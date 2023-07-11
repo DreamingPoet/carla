@@ -129,6 +129,14 @@ public:
   UFUNCTION(BlueprintCallable)
   TArray<FTransform> GetRecommendedSpawnPoints() const;
 
+  /// Return the list of recommended spawn points for vehicles.
+  UFUNCTION(BlueprintCallable)
+  TArray<FString> GetRecommendedTargetPointsNames() const;
+
+  /// Return the list of recommended spawn points for vehicles.
+  UFUNCTION(BlueprintCallable)
+  TArray<FTransform> GetRecommendedTargetPoints() const;
+
   /// Return the GeoLocation point of the map loaded
   const carla::geom::GeoLocation &GetGeoReference() const
   {

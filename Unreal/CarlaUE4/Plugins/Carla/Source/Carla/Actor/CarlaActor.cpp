@@ -356,18 +356,6 @@ void FCarlaActor::SetActorGlobalTransform(
   }
 }
 
-FVector FCarlaActor::GetForwardVector() const
-{
-  if (IsDormant())
-  {
-    return ActorData->ForwardVector;
-  }
-  else
-  {
-    return GetActor()->GetActorForwardVector();
-  }
-}
-
 FVector FCarlaActor::GetActorVelocity() const
 {
   if (IsDormant())
