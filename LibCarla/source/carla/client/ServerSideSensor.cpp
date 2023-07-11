@@ -43,6 +43,12 @@ namespace client {
     listening_mask.set(0);
   }
 
+  std::string ServerSideSensor::Roaming(){
+    // log_error(" in roaming");
+    // 远程调用 实现sensor 漫游
+    return "serverside sensor is Roamming" ;
+  }
+
   void ServerSideSensor::Stop() {
     log_debug("calling sensor Stop() ", GetDisplayId());
     if (!IsListening()) {

@@ -91,6 +91,10 @@ namespace client {
     _episode.Lock()->SetWeatherParameters(weather);
   }
 
+  void World::CameraRoam(){
+    _episode.Lock()->CameraRoam();
+  }
+
   WorldSnapshot World::GetSnapshot() const {
     return _episode.Lock()->GetWorldSnapshot();
   }
@@ -382,6 +386,10 @@ namespace client {
           objects_names, rpc::MaterialParameter::Tex_Emissive, emissive_texture);
     }
   }
+
+  // std::string World::GetCameraAttr() const{
+  //     return "return transform from carla"
+  // }
 
 } // namespace client
 } // namespace carla

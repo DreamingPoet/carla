@@ -315,6 +315,7 @@ void export_world() {
     .def("apply_settings", &ApplySettings, (arg("settings"), arg("seconds")=0.0))
     .def("get_weather", CONST_CALL_WITHOUT_GIL(cc::World, GetWeather))
     .def("set_weather", &cc::World::SetWeather)
+    .def("camera_roam",&cc::World::CameraRoam)
     .def("get_snapshot", &cc::World::GetSnapshot)
     .def("get_actor", CONST_CALL_WITHOUT_GIL_1(cc::World, GetActor, carla::ActorId), (arg("actor_id")))
     .def("get_actors", CONST_CALL_WITHOUT_GIL(cc::World, GetActors))
@@ -354,7 +355,9 @@ void export_world() {
     .def("apply_textures_to_objects", +[](cc::World &self, boost::python::list &list, const cr::TextureColor& diffuse_texture, const cr::TextureFloatColor& emissive_texture, const cr::TextureFloatColor& normal_texture, const cr::TextureFloatColor& ao_roughness_metallic_emissive_texture) {
         self.ApplyTexturesToObjects(PythonLitstToVector<std::string>(list), diffuse_texture, emissive_texture, normal_texture, ao_roughness_metallic_emissive_texture);
       }, (arg("objects_name_list"), arg("diffuse_texture"), arg("emissive_texture"), arg("normal_texture"), arg("ao_roughness_metallic_emissive_texture")))
-    .def(self_ns::str(self_ns::self))
+    .def(self_ns::str(self_ns::self)
+    // .def("get_all_camera",cc::World::GetCameraAttr)
+    )
   ;
 
 #undef SPAWN_ACTOR_WITHOUT_GIL

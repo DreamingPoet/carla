@@ -149,6 +149,8 @@ namespace detail {
 
     void SetWeatherParameters(const rpc::WeatherParameters &weather);
 
+    void CameraRoam();
+
     std::vector<rpc::Actor> GetActorsById(const std::vector<ActorId> &ids);
 
     rpc::VehiclePhysicsControl GetVehiclePhysicsControl(rpc::ActorId vehicle) const;

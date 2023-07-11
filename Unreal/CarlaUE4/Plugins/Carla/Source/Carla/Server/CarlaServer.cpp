@@ -643,6 +643,21 @@ void FCarlaServer::FPimpl::BindActions()
     return R<void>::Success();
   };
 
+  // Get only camera and roam the camera
+  BIND_SYNC(camera_roam) << [this]() -> R<void>
+  {
+      REQUIRE_CARLA_EPISODE();
+      auto* Weather = Episode->GetWeather();
+      if (Weather == nullptr)
+      {
+          RESPOND_ERROR("internal error: unable to find weather");
+      }
+      Weather->CameraRoam();
+
+      return R<void>::Success();;
+  };
+
+
   // ~~ Actor operations ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   BIND_SYNC(get_actors_by_id) << [this](

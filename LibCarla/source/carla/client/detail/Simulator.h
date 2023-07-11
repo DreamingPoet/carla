@@ -245,6 +245,11 @@ namespace detail {
       _client.SetWeatherParameters(weather);
     }
 
+    void CameraRoam() {
+      _client.CameraRoam();
+      // _client.SetWeatherParameters(weather);
+    }
+
     rpc::VehiclePhysicsControl GetVehiclePhysicsControl(const Vehicle &vehicle) const {
       return _client.GetVehiclePhysicsControl(vehicle.GetId());
     }

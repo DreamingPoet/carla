@@ -267,6 +267,11 @@ namespace detail {
     _pimpl->AsyncCall("set_weather_parameters", weather);
   }
 
+  void Client::CameraRoam() {
+    _pimpl->AsyncCall("camera_roam");
+  }
+
+
   std::vector<rpc::Actor> Client::GetActorsById(
       const std::vector<ActorId> &ids) {
     using return_t = std::vector<rpc::Actor>;

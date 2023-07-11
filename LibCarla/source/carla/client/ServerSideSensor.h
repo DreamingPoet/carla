@@ -37,6 +37,8 @@ namespace client {
       return listening_mask.test(0);
     }
 
+    std::string Roaming();
+
     /// Listen fr
     void ListenToGBuffer(uint32_t GBufferId, CallbackFunctionType callback);
 

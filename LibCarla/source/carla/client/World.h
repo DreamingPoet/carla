@@ -93,6 +93,10 @@ namespace client {
     /// Change the weather in the simulation.
     void SetWeather(const rpc::WeatherParameters &weather);
 
+
+    // roam ue camera in simulator
+    void CameraRoam();
+
     /// Return a snapshot of the world at this moment.
     WorldSnapshot GetSnapshot() const;
 
@@ -166,6 +170,9 @@ namespace client {
       return _episode;
     };
 
+    // std::string GetCameraAttr() const;
+
+
     void FreezeAllTrafficLights(bool frozen);
 
     /// Returns all the BBs of all the elements of the level
@@ -229,6 +236,8 @@ namespace client {
         const rpc::TextureFloatColor& ao_roughness_metallic_emissive_texture);
 
     std::vector<std::string> GetNamesOfAllObjects() const;
+
+
 
   private:
 

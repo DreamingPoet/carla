@@ -27,6 +27,11 @@ public:
   UFUNCTION(BlueprintCallable)
   void ApplyWeather(const FWeatherParameters &WeatherParameters);
 
+
+  // 相机漫游 取出一个相机和一个样条线  将样条线的位置给相机
+  UFUNCTION(BlueprintImplementableEvent)
+  void CameraRoam();
+
   /// Notifing the weather to the blueprint's event
   void NotifyWeather(ASensor* Sensor = nullptr);
 
