@@ -19,7 +19,13 @@ namespace detail {
   StreamStateBase::~StreamStateBase() = default;
 
   Buffer StreamStateBase::MakeBuffer() {
-    return _buffer_pool->Pop();
+    if (_buffer_pool.get() != nullptr) {
+      return _buffer_pool->Pop();
+    } else {
+      log_error("StreamStateBase::MakeBuffer() failed!");
+      return std::make_shared<BufferPool>()->Pop();
+    }
+
   }
 
 } // namespace detail
