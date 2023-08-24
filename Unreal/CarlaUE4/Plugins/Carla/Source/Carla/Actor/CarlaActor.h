@@ -209,6 +209,8 @@ public:
 
   ECarlaServerResponse SetActorTargetVelocity(const FVector& Velocity);
 
+  ECarlaServerResponse AttachActorToActor(FCarlaActor* TargetActor);
+
   ECarlaServerResponse SetActorTargetAngularVelocity(const FVector& AngularVelocity);
 
   ECarlaServerResponse AddActorImpulse(const FVector& Impulse);

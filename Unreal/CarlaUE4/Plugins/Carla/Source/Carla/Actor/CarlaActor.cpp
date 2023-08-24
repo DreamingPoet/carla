@@ -407,6 +407,48 @@ ECarlaServerResponse FCarlaActor::SetActorTargetVelocity(const FVector& Velocity
   return ECarlaServerResponse::Success;
 }
 
+#if WITH_EDITOR
+#pragma optimize("", off)
+#endif
+ECarlaServerResponse FCarlaActor::AttachActorToActor(FCarlaActor* TargetActor)
+{
+  if (IsDormant())
+  {
+  }
+  else
+  {
+    AActor* ActorToAttach = TheActor;
+    AActor* ParentActor = TargetActor->GetActor();
+
+    // Let's assume both actors are not nullptr.
+    if(ActorToAttach && ParentActor)
+    {
+        USceneComponent* RootToAttach = ActorToAttach->GetRootComponent();
+        USceneComponent* ParentComponent = ParentActor->GetRootComponent();
+
+        if(RootToAttach && ParentComponent)
+        {
+            // Attach without any rotation or offset, keeping the world position.
+            FAttachmentTransformRules AttachmentRules(EAttachmentRule::SnapToTarget, true);
+            RootToAttach->AttachToComponent(ParentComponent, AttachmentRules);
+        }
+        else
+        {
+            return ECarlaServerResponse::ActorNotFound;
+        }
+    }
+    else
+    {
+        return ECarlaServerResponse::FunctionNotSupported;
+    }
+  }
+  return ECarlaServerResponse::Success;
+}
+
+#if WITH_EDITOR
+#pragma optimize("", on)
+#endif
+
 ECarlaServerResponse FCarlaActor::SetActorTargetAngularVelocity(const FVector& AngularVelocity)
 {
   if (IsDormant())

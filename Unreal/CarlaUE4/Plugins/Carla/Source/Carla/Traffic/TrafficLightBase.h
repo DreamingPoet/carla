@@ -16,7 +16,7 @@
 class ACarlaWheeledVehicle;
 class AWheeledVehicleAIController;
 
-UCLASS()
+UCLASS(hideCategories = (Input, Actor, Collision, Rendering, LOD, Cooking, Replication))
 class CARLA_API ATrafficLightBase : public ATrafficSignBase
 {
 

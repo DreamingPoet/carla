@@ -381,6 +381,10 @@ namespace detail {
       _client.SetActorTargetVelocity(actor.GetId(), vector);
     }
 
+    void AttachTo(const Actor &actor, const Actor &target_actor) {
+      _client.AttachTo(actor.GetId(), target_actor.GetId());
+    }
+
     geom::Vector3D GetActorAngularVelocity(const Actor &actor) const {
       return GetActorSnapshot(actor).angular_velocity;
     }

@@ -113,6 +113,9 @@ public:
     return &CarlaEngine;
   }
 
+  UPROPERTY(BlueprintReadWrite, EditAnywhere)
+      bool bStartCarlaServer;
+
 private:
 
   UPROPERTY(Category = "CARLA Settings", EditAnywhere)
@@ -130,5 +133,7 @@ private:
 
   UPROPERTY()
   FString _MapPath;
+
+
 
 };

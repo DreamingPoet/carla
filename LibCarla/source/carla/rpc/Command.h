@@ -153,6 +153,16 @@ namespace rpc {
       MSGPACK_DEFINE_ARRAY(actor, velocity);
     };
 
+    struct ApplyAttachTo : CommandBase<ApplyAttachTo> {
+      ApplyAttachTo() = default;
+      ApplyAttachTo(ActorId id, ActorId target_id)
+        : actor(id),
+          target_actor(target_id) {}
+      ActorId actor;
+      ActorId target_actor;
+      MSGPACK_DEFINE_ARRAY(actor, target_actor);
+    };
+
     struct ApplyTargetAngularVelocity : CommandBase<ApplyTargetAngularVelocity> {
       ApplyTargetAngularVelocity() = default;
       ApplyTargetAngularVelocity(ActorId id, const geom::Vector3D &value)

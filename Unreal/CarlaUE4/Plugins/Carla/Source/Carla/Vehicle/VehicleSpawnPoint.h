@@ -10,7 +10,7 @@
 #include "VehicleSpawnPoint.generated.h"
 
 /// Base class for spawner locations for walkers.
-UCLASS()
+UCLASS(hideCategories = (Input, Actor, Collision, Rendering, LOD, Cooking, Replication))
 class CARLA_API AVehicleSpawnPoint : public ATargetPoint
 {
   GENERATED_BODY()
@@ -18,13 +18,13 @@ class CARLA_API AVehicleSpawnPoint : public ATargetPoint
 
 
 /// Base class for Target locations for anything.
-UCLASS()
+UCLASS(hideCategories = (Input, Actor, Collision, Rendering, LOD, Cooking, Replication))
 class CARLA_API ACustomTargetPoint : public ATargetPoint
 {
 	GENERATED_BODY()
 
 public:
 	// Only ASCII chataters are supported!
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (ExposeOnSpawn))
 	FString Name;
 };

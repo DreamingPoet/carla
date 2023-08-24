@@ -377,6 +377,10 @@ namespace detail {
     _pimpl->AsyncCall("set_actor_target_velocity", actor, vector);
   }
 
+  void Client::AttachTo(rpc::ActorId actor, rpc::ActorId target_actor) {
+    _pimpl->AsyncCall("attach_to", actor, target_actor);
+  }
+
   void Client::SetActorTargetAngularVelocity(rpc::ActorId actor, const geom::Vector3D &vector) {
     _pimpl->AsyncCall("set_actor_target_angular_velocity", actor, vector);
   }

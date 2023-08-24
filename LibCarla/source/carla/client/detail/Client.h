@@ -197,6 +197,10 @@ namespace detail {
         rpc::ActorId actor,
         const geom::Vector3D &vector);
 
+    void AttachTo(
+        rpc::ActorId actor,
+        rpc::ActorId target_actor);
+
     void SetActorTargetAngularVelocity(
         rpc::ActorId actor,
         const geom::Vector3D &vector);

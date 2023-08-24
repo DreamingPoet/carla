@@ -29,6 +29,7 @@ public:
   }
 
   /// Validate @a ActorDefinition and display messages on error.
+  /// 验证一个 ActorDefinition 的完整性
   bool SingleIsValid(const FActorDefinition &Definition)
   {
     auto ScopeText = FString::Printf(TEXT("[Actor Definition : %s]"), *Definition.Id);
@@ -142,6 +143,7 @@ private:
       ValueIsValid(Attribute.Type, Attribute.Value);
   }
 
+  /// 验证一个 ActorDefinition 的完整性
   bool IsValid(const FActorDefinition &ActorDefinition)
   {
     /// @todo Validate Class and make sure IDs are not repeated.
@@ -173,7 +175,7 @@ static FString ColorToFString(const FColor &Color)
 /// ============================================================================
 /// -- Actor definition validators ---------------------------------------------
 /// ============================================================================
-
+// 检查 注册Actor类 的定义的完整性
 bool UActorBlueprintFunctionLibrary::CheckActorDefinition(const FActorDefinition &ActorDefinition)
 {
   FActorDefinitionValidator Validator;

@@ -38,11 +38,13 @@ struct FActorDefinition
 
   /// Variations represent variables the user can modify to generate variations
   /// of the actor.
+  // 用户可以修改的变量，以生成 actor 的变量。
   UPROPERTY(EditAnywhere, BlueprintReadWrite)
   TArray<FActorVariation> Variations;
 
   /// Attributes represent non-modifiable properties of the actor that might
   /// help the user identifying and filtering actors.
+  // 不可修改属性，这些属性可能有助于用户识别和筛选参与者。
   UPROPERTY(EditAnywhere, BlueprintReadWrite)
   TArray<FActorAttribute> Attributes;
 };

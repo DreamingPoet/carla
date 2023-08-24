@@ -69,6 +69,9 @@ namespace client {
     /// Set the actor velocity before applying physics.
     void SetTargetVelocity(const geom::Vector3D &vector);
 
+    /// AttachTo Actor snap to target
+    void AttachTo(const Actor &actor);
+
     /// Set the angular velocity of the actor before applying physics.
     void SetTargetAngularVelocity(const geom::Vector3D &vector);
 

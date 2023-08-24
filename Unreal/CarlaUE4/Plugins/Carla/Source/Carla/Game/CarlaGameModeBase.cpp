@@ -1,4 +1,4 @@
-// Copyright (c) 2017 Computer Vision Center (CVC) at the Universitat Autonoma
+﻿// Copyright (c) 2017 Computer Vision Center (CVC) at the Universitat Autonoma
 // de Barcelona (UAB).
 //
 // This work is licensed under the terms of the MIT license.
@@ -37,6 +37,7 @@ ACarlaGameModeBase::ACarlaGameModeBase(const FObjectInitializer& ObjectInitializ
   PrimaryActorTick.bCanEverTick = true;
   PrimaryActorTick.TickGroup = TG_PrePhysics;
   bAllowTickBeforeBeginPlay = false;
+
 
   Episode = CreateDefaultSubobject<UCarlaEpisode>(TEXT("Episode"));
 
@@ -108,10 +109,16 @@ void ACarlaGameModeBase::InitGame(
 #endif // WITH_EDITOR
 
   GameInstance = Cast<UCarlaGameInstance>(GetGameInstance());
+
   checkf(
       GameInstance != nullptr,
       TEXT("GameInstance is not a UCarlaGameInstance, did you forget to set "
            "it in the project settings?"));
+
+#if WITH_EDITOR
+  // 阻止carla服务器启动
+  if (!GameInstance->bStartCarlaServer) return;
+#endif
 
   if (TaggerDelegate != nullptr) {
     TaggerDelegate->RegisterSpawnHandler(World);
@@ -172,6 +179,16 @@ void ACarlaGameModeBase::RestartPlayer(AController *NewPlayer)
 void ACarlaGameModeBase::BeginPlay()
 {
   Super::BeginPlay();
+
+#if WITH_EDITOR
+  GameInstance = Cast<UCarlaGameInstance>(GetGameInstance());
+  checkf(
+      GameInstance != nullptr,
+      TEXT("GameInstance is not a UCarlaGameInstance, did you forget to set "
+          "it in the project settings?"));
+  // 阻止carla服务器启动
+  if (!GameInstance->bStartCarlaServer) return;
+#endif
 
   UWorld* World = GetWorld();
   check(World != nullptr);

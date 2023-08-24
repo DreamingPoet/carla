@@ -414,6 +414,23 @@ void UCarlaEpisode::InitializeAtBeginPlay()
       ActorDispatcher->RegisterActor(*Actor, Description);
     }
   }
+
+  // 注册场景中所有的 target_point
+  for (TActorIterator<ACustomTargetPoint> It(World); It; ++It)
+  {
+    auto Actor = *It;
+    check(Actor != nullptr);
+
+    FActorDescription Description;
+    Description.Id = TEXT("target_point.") + It->Name;
+    Description.Class = Actor->GetClass();
+    Description.Variations.Add("name",
+        FActorAttribute{"name", EActorAttributeType::String,
+        It->Name});
+    ActorDispatcher->RegisterActor(*Actor, Description);
+  }
+
+
 }
 
 void UCarlaEpisode::EndPlay(void)

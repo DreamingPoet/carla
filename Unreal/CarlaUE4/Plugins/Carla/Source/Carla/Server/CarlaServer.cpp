@@ -922,6 +922,43 @@ void FCarlaServer::FPimpl::BindActions()
     return R<void>::Success();
   };
 
+  BIND_SYNC(attach_to) << [this](
+      cr::ActorId ActorId,
+      cr::ActorId TargetActorId) -> R<void>
+  {
+    REQUIRE_CARLA_EPISODE();
+    FCarlaActor* CarlaActor = Episode->FindCarlaActor(ActorId);
+    if (!CarlaActor)
+    {
+      return RespondError(
+          "attach_to 1",
+          ECarlaServerResponse::ActorNotFound,
+          " Actor Id: " + FString::FromInt(ActorId));
+    }
+
+    FCarlaActor* TargetCarlaActor = Episode->FindCarlaActor(TargetActorId);
+    if (!TargetCarlaActor)
+    {
+      return RespondError(
+          "attach_to 2",
+          ECarlaServerResponse::ActorNotFound,
+          " TargetActor Id: " + FString::FromInt(ActorId));
+    }
+
+    ECarlaServerResponse Response =
+    
+        CarlaActor->AttachActorToActor(TargetCarlaActor);
+
+    if (Response != ECarlaServerResponse::Success)
+    {
+      return RespondError(
+          "attach_to 3",
+          Response,
+          " Actor Id: " + FString::FromInt(ActorId));
+    }
+    return R<void>::Success();
+  };
+
   BIND_SYNC(set_actor_target_angular_velocity) << [this](
       cr::ActorId ActorId,
       cr::Vector3D vector) -> R<void>
@@ -2476,6 +2513,7 @@ FDataMultiStream FCarlaServer::Start(uint16_t RPCPort, uint16_t StreamingPort, u
 
 void FCarlaServer::NotifyBeginEpisode(UCarlaEpisode &Episode)
 {
+  if (!Pimpl) return;
   check(Pimpl != nullptr);
   UE_LOG(LogCarlaServer, Log, TEXT("New episode '%s' started"), *Episode.GetMapName());
   Pimpl->Episode = &Episode;
@@ -2483,6 +2521,7 @@ void FCarlaServer::NotifyBeginEpisode(UCarlaEpisode &Episode)
 
 void FCarlaServer::NotifyEndEpisode()
 {
+  if (!Pimpl) return;
   check(Pimpl != nullptr);
   Pimpl->Episode = nullptr;
 }
