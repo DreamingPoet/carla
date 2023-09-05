@@ -134,7 +134,16 @@ void TrafficManagerLocal::SetupLocalMap() {
 
 void TrafficManagerLocal::Start() {
   run_traffic_manger.store(true);
+
+  // 创建一个新的线程来运行 Run() 函数
   worker_thread = std::make_unique<std::thread>(&TrafficManagerLocal::Run, this);
+  // worker_thread->join();  // 等待线程结束
+  if (std::exception_ptr eptr = std::current_exception()) {
+      log_info("TrafficManagerLocal::Start()  1");
+          std::rethrow_exception(eptr);  // 重新抛出捕获的异常
+  }
+
+  // worker_thread = std::make_unique<std::thread>(&TrafficManagerLocal::Run, this);
 }
 
 void TrafficManagerLocal::Run() {
@@ -144,9 +153,13 @@ void TrafficManagerLocal::Run() {
   tl_frame.reserve(INITIAL_SIZE);
   control_frame.reserve(INITIAL_SIZE);
   current_reserved_capacity = INITIAL_SIZE;
-
+  try {
   size_t last_frame = 0;
   while (run_traffic_manger.load()) {
+
+    // log_info("TrafficManagerLocal::Run()");
+
+    // throw_exception(std::runtime_error("TrafficManagerLocal::Run() test error"));
 
     bool synchronous_mode = parameters.GetSynchronousMode();
     bool hybrid_physics_mode = parameters.GetHybridPhysicsMode();
@@ -246,6 +259,13 @@ void TrafficManagerLocal::Run() {
       }
     }
   }
+
+      }
+      catch (...) {
+        log_info("Catch an error in TrafficManagerLocal::Run()!");
+          // 捕获任何异常并将其存储在 exception_ptr 中
+          std::exception_ptr eptr = std::current_exception();
+      }
 }
 
 bool TrafficManagerLocal::SynchronousTick() {
