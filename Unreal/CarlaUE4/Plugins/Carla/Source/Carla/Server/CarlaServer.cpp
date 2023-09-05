@@ -924,35 +924,63 @@ void FCarlaServer::FPimpl::BindActions()
 
   BIND_SYNC(attach_to) << [this](
       cr::ActorId ActorId,
-      cr::ActorId TargetActorId) -> R<void>
+      cr::ActorId TargetActorId,
+      cr::Transform Transform
+      ) -> R<void>
+  {
+      REQUIRE_CARLA_EPISODE();
+      FCarlaActor* CarlaActor = Episode->FindCarlaActor(ActorId);
+      if (!CarlaActor)
+      {
+          return RespondError(
+              "attach_to 1",
+              ECarlaServerResponse::ActorNotFound,
+              " Actor Id: " + FString::FromInt(ActorId));
+      }
+
+      FCarlaActor* TargetCarlaActor = Episode->FindCarlaActor(TargetActorId);
+      if (!TargetCarlaActor)
+      {
+          return RespondError(
+              "attach_to 2",
+              ECarlaServerResponse::ActorNotFound,
+              " TargetActor Id: " + FString::FromInt(ActorId));
+      }
+
+      ECarlaServerResponse Response =
+
+          CarlaActor->AttachActorToActor(TargetCarlaActor, Transform);
+
+      if (Response != ECarlaServerResponse::Success)
+      {
+          return RespondError(
+              "attach_to 3",
+              Response,
+              " Actor Id: " + FString::FromInt(ActorId));
+      }
+      return R<void>::Success();
+  };
+
+  BIND_SYNC(set_sensor_fov) << [this](
+      cr::ActorId ActorId,
+      float fov) -> R<void>
   {
     REQUIRE_CARLA_EPISODE();
     FCarlaActor* CarlaActor = Episode->FindCarlaActor(ActorId);
     if (!CarlaActor)
     {
       return RespondError(
-          "attach_to 1",
+          "set_sensor_fov 1",
           ECarlaServerResponse::ActorNotFound,
           " Actor Id: " + FString::FromInt(ActorId));
     }
 
-    FCarlaActor* TargetCarlaActor = Episode->FindCarlaActor(TargetActorId);
-    if (!TargetCarlaActor)
-    {
-      return RespondError(
-          "attach_to 2",
-          ECarlaServerResponse::ActorNotFound,
-          " TargetActor Id: " + FString::FromInt(ActorId));
-    }
-
-    ECarlaServerResponse Response =
-    
-        CarlaActor->AttachActorToActor(TargetCarlaActor);
+    ECarlaServerResponse Response = CarlaActor->SetSensorActorFov(fov);
 
     if (Response != ECarlaServerResponse::Success)
     {
       return RespondError(
-          "attach_to 3",
+          "set_sensor_fov 2",
           Response,
           " Actor Id: " + FString::FromInt(ActorId));
     }

@@ -199,7 +199,11 @@ namespace detail {
 
     void AttachTo(
         rpc::ActorId actor,
-        rpc::ActorId target_actor);
+        rpc::ActorId target_actor,
+        const geom::Transform &transform);
+
+    void SetSensorFov(
+        rpc::ActorId actor, const float fov);
 
     void SetActorTargetAngularVelocity(
         rpc::ActorId actor,

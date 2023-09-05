@@ -381,8 +381,12 @@ namespace detail {
       _client.SetActorTargetVelocity(actor.GetId(), vector);
     }
 
-    void AttachTo(const Actor &actor, const Actor &target_actor) {
-      _client.AttachTo(actor.GetId(), target_actor.GetId());
+    void AttachTo(const Actor &actor, const Actor &target_actor, const geom::Transform &transform) {
+      _client.AttachTo(actor.GetId(), target_actor.GetId(), transform);
+    }
+
+    void SetSensorFov(const Actor &sensor_actor, const float fov) {
+      _client.SetSensorFov(sensor_actor.GetId(), fov);
     }
 
     geom::Vector3D GetActorAngularVelocity(const Actor &actor) const {

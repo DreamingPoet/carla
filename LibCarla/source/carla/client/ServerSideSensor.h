@@ -39,6 +39,9 @@ namespace client {
 
     std::string Roaming();
 
+    /// Set Fov
+   void SetFov(float fov);
+
     /// Listen fr
     void ListenToGBuffer(uint32_t GBufferId, CallbackFunctionType callback);
 

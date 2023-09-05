@@ -43,10 +43,15 @@ namespace client {
     listening_mask.set(0);
   }
 
-  std::string ServerSideSensor::Roaming(){
+  std::string ServerSideSensor::Roaming() {
     // log_error(" in roaming");
     // 远程调用 实现sensor 漫游
     return "serverside sensor is Roamming" ;
+  }
+
+  void ServerSideSensor::SetFov(float fov) {
+    log_debug("calling sensor SetFov() ", GetDisplayId());
+    GetEpisode().Lock()->SetSensorFov(*this, fov);
   }
 
   void ServerSideSensor::Stop() {

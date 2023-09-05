@@ -17,6 +17,7 @@
 #include "Carla/Vehicle/MovementComponents/ChronoMovementComponent.h"
 #include "Carla/Traffic/TrafficLightBase.h"
 #include "Carla/Game/CarlaStatics.h"
+#include "Carla/Sensor/SceneCaptureSensor.h"
 
 #include <compiler/disable-ue4-macros.h>
 #include <carla/rpc/AckermannControllerSettings.h>
@@ -410,7 +411,7 @@ ECarlaServerResponse FCarlaActor::SetActorTargetVelocity(const FVector& Velocity
 #if WITH_EDITOR
 #pragma optimize("", off)
 #endif
-ECarlaServerResponse FCarlaActor::AttachActorToActor(FCarlaActor* TargetActor)
+ECarlaServerResponse FCarlaActor::AttachActorToActor(FCarlaActor* TargetActor, const FTransform& Transform)
 {
   if (IsDormant())
   {
@@ -431,6 +432,7 @@ ECarlaServerResponse FCarlaActor::AttachActorToActor(FCarlaActor* TargetActor)
             // Attach without any rotation or offset, keeping the world position.
             FAttachmentTransformRules AttachmentRules(EAttachmentRule::SnapToTarget, true);
             RootToAttach->AttachToComponent(ParentComponent, AttachmentRules);
+            RootToAttach->SetRelativeTransform(Transform);
         }
         else
         {
@@ -440,6 +442,29 @@ ECarlaServerResponse FCarlaActor::AttachActorToActor(FCarlaActor* TargetActor)
     else
     {
         return ECarlaServerResponse::FunctionNotSupported;
+    }
+  }
+  return ECarlaServerResponse::Success;
+}
+
+ECarlaServerResponse FCarlaActor::SetSensorActorFov(const float fov)
+{
+  if (IsDormant()) {}
+  else {
+    // Let's assume both actors are not nullptr.
+    if(TheActor) {
+        ASceneCaptureSensor* SensorActor = Cast<ASceneCaptureSensor>(TheActor);
+        if(SensorActor) {
+          SensorActor->SetFOVAngle(fov);
+        }
+        else
+        {
+            return ECarlaServerResponse::ActorNotFound;
+        }
+    }
+    else
+    {
+        return ECarlaServerResponse::ActorNotFound;
     }
   }
   return ECarlaServerResponse::Success;

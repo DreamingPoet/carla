@@ -427,6 +427,12 @@ void UCarlaEpisode::InitializeAtBeginPlay()
     Description.Variations.Add("name",
         FActorAttribute{"name", EActorAttributeType::String,
         It->Name});
+    Description.Variations.Add("origin_loc",
+        FActorAttribute{ "origin_loc", EActorAttributeType::String,
+        It->GetActorLocation().ToString()});
+    Description.Variations.Add("origin_rot",
+        FActorAttribute{ "origin_rot", EActorAttributeType::String,
+        It->GetActorRotation().ToString() });
     ActorDispatcher->RegisterActor(*Actor, Description);
   }
 

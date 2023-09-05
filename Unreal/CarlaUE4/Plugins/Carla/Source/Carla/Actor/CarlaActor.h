@@ -209,7 +209,9 @@ public:
 
   ECarlaServerResponse SetActorTargetVelocity(const FVector& Velocity);
 
-  ECarlaServerResponse AttachActorToActor(FCarlaActor* TargetActor);
+  ECarlaServerResponse AttachActorToActor(FCarlaActor* TargetActor, const FTransform& Transform);
+
+  ECarlaServerResponse SetSensorActorFov(const float fov);
 
   ECarlaServerResponse SetActorTargetAngularVelocity(const FVector& AngularVelocity);
 

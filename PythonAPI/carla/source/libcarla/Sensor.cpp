@@ -39,6 +39,7 @@ void export_sensor() {
     .def("is_listening_gbuffer", &cc::ServerSideSensor::IsListeningGBuffer, (arg("gbuffer_id")))
     .def("stop_gbuffer", &cc::ServerSideSensor::StopGBuffer, (arg("gbuffer_id")))
     .def("roaming",&cc::ServerSideSensor::Roaming)
+    .def("set_fov", &cc::ServerSideSensor::SetFov, (arg("fov")))
     .def(self_ns::str(self_ns::self))
   ;
 

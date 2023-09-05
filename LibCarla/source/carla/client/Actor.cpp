@@ -44,8 +44,8 @@ namespace client {
     GetEpisode().Lock()->SetActorTargetVelocity(*this, vector);
   }
 
-  void Actor::AttachTo(const Actor &actor) {
-    GetEpisode().Lock()->AttachTo(*this, actor);
+  void Actor::AttachTo(const Actor &actor, const geom::Transform &transform) {
+    GetEpisode().Lock()->AttachTo(*this, actor, transform);
   }
 
   void Actor::SetTargetAngularVelocity(const geom::Vector3D &vector) {
