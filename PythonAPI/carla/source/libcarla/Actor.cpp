@@ -126,7 +126,7 @@ void export_actor() {
       .def("set_simulate_physics", &cc::Actor::SetSimulatePhysics, (arg("enabled") = true))
       .def("set_enable_gravity", &cc::Actor::SetEnableGravity, (arg("enabled") = true))
       .def("destroy", CALL_WITHOUT_GIL(cc::Actor, Destroy))
-      .def("attach_to", &cc::Actor::AttachTo, (arg("actor"), arg("transform")))
+      .def("attach_to", &cc::Actor::AttachTo, (arg("actor"), arg("transform") = carla::geom::Transform()))
       .def(self_ns::str(self_ns::self))
   ;
 
@@ -188,6 +188,7 @@ void export_actor() {
       .def("set_autopilot", CALL_WITHOUT_GIL_2(cc::Vehicle, SetAutopilot, bool, uint16_t), (arg("enabled") = true, arg("tm_port") = ctm::TM_DEFAULT_PORT))
       .def("show_debug_telemetry", &cc::Vehicle::ShowDebugTelemetry, (arg("enabled") = true))
       .def("get_speed_limit", &cc::Vehicle::GetSpeedLimit)
+      .def("set_speed_limit", &cc::Vehicle::SetSpeedLimit, (arg("speed")))
       .def("get_traffic_light_state", &cc::Vehicle::GetTrafficLightState)
       .def("is_at_traffic_light", &cc::Vehicle::IsAtTrafficLight)
       .def("get_traffic_light", &cc::Vehicle::GetTrafficLight)

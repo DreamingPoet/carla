@@ -282,6 +282,11 @@ public:
     return ECarlaServerResponse::ActorTypeMismatch;
   }
 
+  virtual ECarlaServerResponse SetSpeedLimit(const float speed)
+  {
+    return ECarlaServerResponse::ActorTypeMismatch;
+  }
+
   virtual ECarlaServerResponse GetWheelSteerAngle(const EVehicleWheelLocation&, float&)
   {
     return ECarlaServerResponse::ActorTypeMismatch;
@@ -497,6 +502,8 @@ public:
 
   virtual ECarlaServerResponse SetWheelSteerDirection(
       const EVehicleWheelLocation& WheelLocation, float AngleInDeg) final;
+
+  virtual ECarlaServerResponse SetSpeedLimit(const float speed) final;
 
   virtual ECarlaServerResponse GetWheelSteerAngle(
       const EVehicleWheelLocation& WheelLocation, float& Angle);

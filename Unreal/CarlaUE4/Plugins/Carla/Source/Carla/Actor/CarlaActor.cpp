@@ -843,6 +843,33 @@ ECarlaServerResponse FVehicleActor::SetWheelSteerDirection(
   return ECarlaServerResponse::Success;
 }
 
+ECarlaServerResponse FVehicleActor::SetSpeedLimit(const float speed)
+{
+  if (IsDormant()) {}
+  else {
+    // Let's assume both actors are not nullptr.
+    if(GetActor()) {
+        ACarlaWheeledVehicle* Vehicle = Cast<ACarlaWheeledVehicle>(GetActor());
+        if(Vehicle) {
+            auto Controller = Cast<AWheeledVehicleAIController>(Vehicle->GetController());
+            if (Controller)
+            {
+              Controller->SetSpeedLimit(speed);
+            }
+        }
+        else
+        {
+            return ECarlaServerResponse::ActorNotFound;
+        }
+    }
+    else
+    {
+        return ECarlaServerResponse::ActorNotFound;
+    }
+  }
+  return ECarlaServerResponse::Success;
+}
+
 ECarlaServerResponse FVehicleActor::GetWheelSteerAngle(
       const EVehicleWheelLocation& WheelLocation, float& Angle)
 {

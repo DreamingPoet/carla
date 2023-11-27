@@ -1410,6 +1410,30 @@ void FCarlaServer::FPimpl::BindActions()
     return R<void>::Success();
   };
 
+  BIND_SYNC(set_speed_limit) << [this](
+    cr::ActorId ActorId,
+    float speed) -> R<void>
+  {
+    REQUIRE_CARLA_EPISODE();
+    FCarlaActor* CarlaActor = Episode->FindCarlaActor(ActorId);
+    if(!CarlaActor){
+      return RespondError(
+          "set_speed_limit",
+          ECarlaServerResponse::ActorNotFound,
+          " Actor Id: " + FString::FromInt(ActorId));
+    }
+    ECarlaServerResponse Response =
+        CarlaActor->SetSpeedLimit(speed);
+    if (Response != ECarlaServerResponse::Success)
+    {
+      return RespondError(
+          "set_speed_limit",
+          Response,
+          " Actor Id: " + FString::FromInt(ActorId));
+    }
+    return R<void>::Success();
+  };
+
   BIND_SYNC(get_wheel_steer_angle) << [this](
       const cr::ActorId ActorId,
       cr::VehicleWheelLocation WheelLocation) -> R<float>

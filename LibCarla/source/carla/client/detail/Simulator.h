@@ -522,6 +522,10 @@ namespace detail {
       _client.SetWheelSteerDirection(vehicle.GetId(), wheel_location, angle_in_deg);
     }
 
+    void SetSpeedLimit(Vehicle &vehicle, float speed) {
+      _client.SetSpeedLimit(vehicle.GetId(), speed);
+    }
+
     float GetWheelSteerAngle(Vehicle &vehicle, rpc::VehicleWheelLocation wheel_location) {
       return _client.GetWheelSteerAngle(vehicle.GetId(), wheel_location);
     }

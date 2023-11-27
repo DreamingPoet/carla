@@ -78,6 +78,9 @@ namespace client {
     /// Sets a @a Rotation to a wheel of the vehicle (affects the bone of the car skeleton, not the physics)
     void SetWheelSteerDirection(WheelLocation wheel_location, float angle_in_deg);
 
+    /// Set the speed limit .
+    void SetSpeedLimit(float speed);
+
     /// Return a @a Rotation from a wheel of the vehicle
     ///
     /// @note The function returns the rotation of the vehicle based on the it's physics

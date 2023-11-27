@@ -319,6 +319,12 @@ namespace detail {
     return _pimpl->AsyncCall("set_wheel_steer_direction", vehicle, vehicle_wheel, angle_in_deg);
   }
 
+  void Client::SetSpeedLimit(
+        rpc::ActorId vehicle,
+        float speed) {
+    return _pimpl->AsyncCall("set_speed_limit", vehicle, speed);
+  }
+
   float Client::GetWheelSteerAngle(
         rpc::ActorId vehicle,
         rpc::VehicleWheelLocation wheel_location){

@@ -286,6 +286,11 @@ namespace detail {
         float angle_in_deg
     );
 
+    void SetSpeedLimit(
+        rpc::ActorId vehicle,
+        float speed
+    );
+
     float GetWheelSteerAngle(
         rpc::ActorId vehicle,
         rpc::VehicleWheelLocation wheel_location

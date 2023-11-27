@@ -87,6 +87,10 @@ namespace client {
     GetEpisode().Lock()->SetWheelSteerDirection(*this, wheel_location, angle_in_deg);
   }
 
+  void Vehicle::SetSpeedLimit(float speed) {
+    GetEpisode().Lock()->SetSpeedLimit(*this, speed);
+  }
+
   float Vehicle::GetWheelSteerAngle(WheelLocation wheel_location) {
     return GetEpisode().Lock()->GetWheelSteerAngle(*this, wheel_location);
   }
